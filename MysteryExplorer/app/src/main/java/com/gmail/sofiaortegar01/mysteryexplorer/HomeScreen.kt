@@ -26,11 +26,11 @@ data class CategoryUi(
 @Composable
 fun HomeScreen(
     onCategoryClick: (String) -> Unit,
-    onSearchQueryChanged: (String) -> Unit
+    onSearchQueryChanged: (String) -> Unit,
+    onReportClick: () -> Unit // <-- NUEVO: Acción para ir a reportar
 ) {
     var searchQuery by remember { mutableStateOf("") }
 
-    // Lista de nuestras 5 categorías obligatorias
     val categories = listOf(
         CategoryUi("ovnis", "OVNIs", "👽", "Avistamientos y luces"),
         CategoryUi("lugares", "Lugares misteriosos", "🗺", "Sitios con leyendas"),
@@ -48,6 +48,14 @@ fun HomeScreen(
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             )
+        },
+        // NUEVO: Agregamos el Botón de Acción Flotante (Cumpliendo Sección 2)
+        floatingActionButton = {
+            ExtendedFloatingActionButton(
+                onClick = onReportClick,
+                icon = { Text("📝") },
+                text = { Text("Reportar") }
+            )
         }
     ) { innerPadding ->
         Column(
@@ -57,6 +65,7 @@ fun HomeScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            // ... (el resto de tu código de HomeScreen se queda igualito)
             // Descripción breve
             Text(
                 text = "Explora lo desconocido 🌎",
@@ -84,8 +93,10 @@ fun HomeScreen(
             )
 
             // Cuadrícula de categorías con Tarjetas (Cards)
+            // Cuadrícula de categorías adaptativa
             LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
+                // CAMBIO 1: Usamos Adaptive para que se adapte al tamaño de la pantalla
+                columns = GridCells.Adaptive(minSize = 140.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
                 modifier = Modifier.fillMaxWidth()
@@ -102,6 +113,7 @@ fun HomeScreen(
 }
 
 // Componente visual para cada tarjeta de categoría
+// Componente visual para cada tarjeta de categoría
 @Composable
 fun CategoryCard(
     category: CategoryUi,
@@ -110,7 +122,7 @@ fun CategoryCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp)
+            .aspectRatio(1.3f) // CAMBIO 2: Mantiene una proporción visual perfecta según el ancho disponible
             .clickable { onClick() },
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         colors = CardDefaults.cardColors(

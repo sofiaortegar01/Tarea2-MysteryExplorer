@@ -12,12 +12,33 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = DeepPurplePrimary,
+    onPrimary = TextOnPrimary,
+    primaryContainer = DeepPurpleVariant,
+    onPrimaryContainer = TextLight,
+    secondary = MysticalAccent,
+    background = DarkBackground,
+    surface = DarkBackground,
+    surfaceVariant = SurfaceDark,
+    onSurface = TextLight,
+    onSurfaceVariant = TextLight
 )
 
-private val LightColorScheme = lightColorScheme(
+@Composable
+fun MysteryExplorerTheme(
+    darkTheme: Boolean = true, // Forzamos true por defecto para mantener el estilo misterioso oscuro
+    content: @Composable () -> Unit
+) {
+    val colorScheme = DarkColorScheme // Usamos nuestra paleta oscura de misterio
+
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = Typography,
+        content = content
+    )
+}
+
+/*private val LightColorScheme = lightColorScheme(
     primary = Purple40,
     secondary = PurpleGrey40,
     tertiary = Pink40
@@ -56,3 +77,5 @@ fun MysteryExplorerTheme(
         content = content
     )
 }
+
+ */
