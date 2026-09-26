@@ -9,16 +9,17 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import com.gmail.sofiaortegar01.mysteryexplorer.ui.CasesScreen
-import com.gmail.sofiaortegar01.mysteryexplorer.ui.CountryScreen
 import com.gmail.sofiaortegar01.mysteryexplorer.ui.DetailScreen
 import com.gmail.sofiaortegar01.mysteryexplorer.ui.HomeScreen
 import com.gmail.sofiaortegar01.mysteryexplorer.ui.MysteryCaseUi
 import com.gmail.sofiaortegar01.mysteryexplorer.ui.ReportScreen
+import com.gmail.sofiaortegar01.mysteryexplorer.ui.WorldMapScreen // <--- Importamos tu nuevo mapa
 import com.gmail.sofiaortegar01.mysteryexplorer.ui.theme.MysteryExplorerTheme
 
 sealed class Screen {
     object Home : Screen()
     data class Country(val categoryId: String) : Screen()
+    // Actualizamos Cases para que reciba el país seleccionado desde el mapa
     data class Cases(val categoryId: String, val countryId: String) : Screen()
     data class Detail(val caseId: String) : Screen()
     object Report : Screen()
@@ -38,12 +39,35 @@ class MainActivity : ComponentActivity() {
                     var selectedCategory by remember { mutableStateOf("") }
                     var selectedCountry by remember { mutableStateOf("") }
                     var selectedCaseId by remember { mutableStateOf("1") }
-
                     val casesList = remember {
                         mutableStateListOf(
-                            MysteryCaseUi("1", "Caso Roswell", "ovnis", "us", "1947", "Supuesto choque de una nave nodriza extraterrestre."),
-                            MysteryCaseUi("2", "Luces de Ciudad Juárez", "ovnis", "mx", "2020", "Avistamientos masivos de objetos luminosos en el norte."),
-                            MysteryCaseUi("3", "El Monstruo de la Laguna", "criaturas", "mx", "1995", "Extrañas criaturas avistadas cerca de cuerpos de agua.")
+                            MysteryCaseUi(
+                                id = "1",
+                                title = "Caso Roswell",
+                                category = "ovnis",
+                                country = "us",
+                                year = "1947",
+                                description = "Supuesto choque de una nave nodriza extraterrestre.",
+                                imageRes = R.drawable.ovni1 // Asegúrate de tener tus drawables listos
+                            ),
+                            MysteryCaseUi(
+                                id = "2",
+                                title = "Luces de Ciudad Juárez",
+                                category = "ovnis",
+                                country = "mx",
+                                year = "2020",
+                                description = "Avistamientos masivos de objetos luminosos en el norte.",
+                                imageRes = R.drawable.ovni1 // Cambia por tu recurso correspondiente
+                            ),
+                            MysteryCaseUi(
+                                id = "3",
+                                title = "El Monstruo de la Laguna",
+                                category = "criaturas",
+                                country = "mx",
+                                year = "1995",
+                                description = "Extrañas criaturas avistadas cerca de cuerpos de agua.",
+                                imageRes = R.drawable.criaturas2 // Cambia por tu recurso correspondiente
+                            )
                         )
                     }
 
@@ -52,6 +76,7 @@ class MainActivity : ComponentActivity() {
                             HomeScreen(
                                 onCategoryClick = { categoryId ->
                                     selectedCategory = categoryId
+                                    // Al hacer clic en una categoría (ej. OVNIs), ahora nos lleva al mapa
                                     currentScreen = Screen.Country(categoryId)
                                 },
                                 onSearchQueryChanged = { query -> },
@@ -61,12 +86,15 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         is Screen.Country -> {
-                            CountryScreen(
-                                categoryId = screen.categoryId,
-                                onBackClick = { currentScreen = Screen.Home },
-                                onCountryClick = { countryId ->
+                            // Aquí reemplazamos CountryScreen por tu WorldMapScreen con pines
+                            WorldMapScreen(
+                                onCountrySelected = { countryId ->
                                     selectedCountry = countryId
+                                    // Cuando el usuario toca un pin en el mapa, avanza a los casos de ese país
                                     currentScreen = Screen.Cases(screen.categoryId, countryId)
+                                },
+                                onBackClick = {
+                                    currentScreen = Screen.Home
                                 }
                             )
                         }
@@ -79,6 +107,7 @@ class MainActivity : ComponentActivity() {
                                 categoryId = screen.categoryId,
                                 countryId = screen.countryId,
                                 customCases = filteredCases,
+                                // Al regresar desde los casos, lo mandamos de vuelta al mapa
                                 onBackClick = { currentScreen = Screen.Country(screen.categoryId) },
                                 onCaseClick = { caseId ->
                                     selectedCaseId = caseId

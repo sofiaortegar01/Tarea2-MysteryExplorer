@@ -1,7 +1,9 @@
 package com.gmail.sofiaortegar01.mysteryexplorer.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -12,12 +14,19 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.gmail.sofiaortegar01.mysteryexplorer.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
     caseId: String,
+    // Opcional: Puedes pasarle el objeto completo del caso o su imagen directamente.
+    // Aquí usamos un recurso por defecto o puedes cambiarlo por tu modelo `MysteryCaseUi`.
+    imageRes: Int = R.drawable.ovnis,
     onBackClick: () -> Unit
 ) {
     val scrollState = rememberScrollState()
@@ -46,25 +55,22 @@ fun DetailScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Contenedor visual simulando la imagen del caso
+            // --- IMAGEN REAL DEL CASO ---
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp),
+                    .height(220.dp),
+                shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surfaceVariant
                 )
             ) {
-                Box(
+                Image(
+                    painter = painterResource(id = imageRes),
+                    contentDescription = "Imagen del caso",
                     modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "🛸 [ IMAGEN DEL CASO ]",
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
+                    contentScale = ContentScale.Crop // Asegura que la foto llene el espacio sin deformarse
+                )
             }
 
             // Título del caso
@@ -84,9 +90,9 @@ fun DetailScreen(
                 BadgeItem(text = "👽 OVNI")
             }
 
-            Divider()
+            HorizontalDivider()
 
-            // Indicadores de progreso (Nivel de misterio y credibilidad corregidos con llaves)
+            // Indicadores de progreso
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text("Nivel de misterio (80%)", style = MaterialTheme.typography.bodyMedium)
                 LinearProgressIndicator(
@@ -107,7 +113,7 @@ fun DetailScreen(
                 )
             }
 
-            Divider()
+            HorizontalDivider()
 
             // Descripción detallada
             Text(

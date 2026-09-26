@@ -17,6 +17,7 @@ data class MysteryCaseUi(
     val category: String,
     val country: String,
     val year: String,
+    val imageRes: Int,
     val description: String
 )
 

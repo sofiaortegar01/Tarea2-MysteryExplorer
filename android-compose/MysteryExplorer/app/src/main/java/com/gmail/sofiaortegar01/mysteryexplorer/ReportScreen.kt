@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import com.gmail.sofiaortegar01.mysteryexplorer.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -201,7 +202,8 @@ fun ReportScreen(
                             category = selectedCategory,
                             country = selectedCountry,
                             year = year.ifBlank { "2026" },
-                            description = description.ifBlank { "Caso reportado por la comunidad." }
+                            description = description.ifBlank { "Caso reportado por la comunidad." },
+                            imageRes = R.drawable.ovnis // <--- ¡Añade esto! (puedes usar R.drawable.ovnis o la imagen por defecto que prefieras para los reportes)
                         )
                         onReportSubmitted(newCase)
                     }
