@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#1A1225"
+    android:padding="16.dp">
+
+    <TextView
+        android:id="@+id/txtCategoryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecciona un País"
+        android:textSize="22sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16.dp"/>
+
+    <Button
+        android:id="@+id/btnMexico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🇲🇽 México"
+        android:backgroundTint="#3B2054"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8.dp"/>
+
+    <Button
+        android:id="@+id/btnUsa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🇺🇸 Estados Unidos"
+        android:backgroundTint="#3B2054"
+        android:textColor="#FFFFFF"/>
+
+</LinearLayout>

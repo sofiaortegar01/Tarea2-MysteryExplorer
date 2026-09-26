@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#1A1225"
+    android:padding="16.dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mystery Explorer (XML)"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16.dp"/>
+
+    <!-- Contenedor de Categorías (Simulando tarjetas) -->
+    <Button
+        android:id="@+id/btnOvnis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="👽 OVNIs y Avistamientos"
+        android:backgroundTint="#5B3580"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8.dp"/>
+
+    <Button
+        android:id="@+id/btnLugares"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🗺 Lugares Misteriosos"
+        android:backgroundTint="#5B3580"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8.dp"/>
+
+    <Button
+        android:id="@+id/btnReportar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📝 Reportar Nuevo Caso (FAB / Formulario)"
+        android:backgroundTint="#FFC107"
+        android:textColor="#1A1225"
+        android:layout_marginTop="24.dp"/>
+
+</LinearLayout>
