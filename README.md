@@ -49,19 +49,39 @@ La aplicación fue implementada de manera equivalente en tres tecnologías disti
 3. Conectar un dispositivo o iniciar un emulador.
 4. Ejecutar el comando `flutter run` o presionar F5.
 
----
+##  4. Mapeo de Secciones con capturas de pantalla 
 
-##  4. Capturas de Pantalla de las Secciones
-*(Las imágenes se encuentran almacenadas en la carpeta `docs/` del repositorio)*
+A continuación se detalla en qué pantallas y componentes específicos de la aplicación se implementó cada uno de los requerimientos de la rúbrica:
 
-* **Sección 1 (Entrada de Texto):** ![Entrada de texto](docs/seccion1_textinput.png)
-* **Sección 2 (Botones y Acciones):** ![Botones](docs/seccion2_buttons.png)
-* **Sección 3 (Elementos de Selección):** ![Selección](docs/seccion3_selection.png)
-* **Sección 4 (Listas y Colecciones):** ![Listas](docs/seccion4_lists.png)
-* **Sección 5 (Información y Retroalimentación):** ![Feedback](docs/seccion5_feedback.png)
-* **Sección 6 (Contenedores y Estructura):** ![Contenedores](docs/seccion6_containers.png)
+### 1. Sección 1: Entrada de texto
+* **Pantalla:** `ReportScreen.kt` (Pantalla de Reporte de Fenómenos).
+* **Implementación:** Se utilizaron componentes `OutlinedTextField` con validaciones visuales de errores para capturar campos de texto como el nombre del fenómeno, correo electrónico, teléfono, número de testigos, contraseña y descripción detallada.
+* **Captura de pantalla:** ![Pantalla 1- Pantalla principal](docs/home_screen.png)
 
----
+### 2. Sección 2: Botones y Acciones
+* **Pantalla:** `HomeScreen.kt` (Pantalla de Inicio) y pantallas de navegación.
+* **Implementación:** Se integró un Botón de Acción Flotante extendido (`ExtendedFloatingActionButton` con la etiqueta "Reportar") en la esquina inferior y eventos de interacción táctil (`clickable`) en las tarjetas de categoría.
+* **Captura de pantalla:** ![Sección 2 - Reporte de avistamiento ](docs/report_screen.png)
+
+### 3. Sección 3: Elementos de selección
+* **Pantalla:** `ReportScreen.kt` (Pantalla de Reporte).
+* **Implementación:** Se incluyeron botones de opción (`RadioButton`) para elegir estrictamente entre las 5 categorías y países disponibles, un interruptor (`Switch`) para confirmar la veracidad del reporte, y deslizadores (`Slider`) para establecer los niveles de misterio y credibilidad.
+* **Captura de pantalla:** ![Sección 3 - Elementos de selección](docs/map_screen.png)
+
+### 4. Sección 4: Listas y Colecciones
+* **Pantalla:** `HomeScreen.kt`, `CountryScreen.kt` y `CasesScreen.kt`.
+* **Implementación:** Se empleó el componente de alto rendimiento `LazyColumn` en conjunto con `items` para renderizar de manera dinámica las listas de categorías, los países disponibles y los expedientes filtrados según la selección del usuario.
+* **Captura de pantalla:** ![Sección 4 - Listas y Colecciones](docs/list_screen.png)
+
+### 5. Sección 5: Información y Retroalimentación
+* **Pantalla:** `DetailScreen.kt` y componentes de estado vacío.
+* **Implementación:** Se desarrolló la vista detallada que muestra la información completa del caso seleccionado (año, descripción detallada) junto con mensajes informativos y de estado cuando una sección no cuenta con reportes activos.
+* **Captura de pantalla:** ![Sección 5 - Información y Retroalimentación](docs/detail_screen.png)
+
+### 6. Sección 6: Contenedores y Estructura
+* **Pantalla:** Arquitectura general de la aplicación en todas las vistas.
+* **Implementación:** Se estructuró el diseño utilizando contenedores jerárquicos como `Scaffold`, `TopAppBar`, `Surface` y `Card`, unificados bajo el sistema de diseño oscuro y personalizado (`MysteryExplorerTheme`).
+
 
 ##  5. Reflexión Final
 
